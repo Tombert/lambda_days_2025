@@ -342,7 +342,7 @@ header-includes:
 
 . . . 
  
-- TODO Placeholder
+- TODO Placeholder. 
 
 . . . 
 
@@ -356,6 +356,7 @@ header-includes:
  
 - Convince your employers to upgrade if you want to reclaim your sanity. 
 
+- Blah
 . . . 
 
 - Use libraries like Vert.x and Disruptor to make life simpler. 
