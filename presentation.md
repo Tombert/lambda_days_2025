@@ -2,7 +2,10 @@
 title: From ‘Java Sucks’ to ‘Java...Eh, Not Bad’
 subtitle:  How Vert.x & Java 21 Made Me Stop Complaining
 author: Thomas Gebert
-pdf-engine: xelatex
+header-includes:
+  - \usepackage{minted}
+  - \setminted{fontsize=\footnotesize, bgcolor=bg, frame=lines, framesep=2mm}
+  - \definecolor{bg}{RGB}{40, 44, 52}
 ---
 
 # Who Am I?
@@ -227,9 +230,24 @@ pdf-engine: xelatex
 
 . . . 
 
+# Code Test
+
+```java
+class Howdy {
+    int blah; 
+    int main(String yo) {
+       System.out.println("Hey!");
+       return 0; 
+    
+    }
+
+}
+```
+
 # Java 21 New Features.  
 
 . . . 
+
 
 ## Pattern Matching
 
@@ -302,6 +320,14 @@ pdf-engine: xelatex
 . . .  
 
 # Vert.x basic concurrency example
+
+. . . 
+
+- TODO placeholder
+
+. . . 
+
+# Vert.x more complicated concurrency example. 
 
 . . . 
 
