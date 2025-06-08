@@ -35,11 +35,17 @@
                                     pkgs.texlive.combined.scheme-full pkgs.pandoc
                                 ];
 
+				theme = "Singapore";
+				highlight = "zenburn";
+				font = "RecursiveMonoCslSt-Regular.ttf";
                                 buildPhase = ''
 
 
-					pandoc -t beamer --highlight-style=breezeDark -V classoption=handout -V theme:Warsaw ./presentation.md -o slides_no_pause.pdf
-					pandoc -t beamer --highlight-style=breezeDark -V theme:Warsaw ./presentation.md -o slides.pdf 
+	pandoc -t beamer --pdf-engine=xelatex  -V listings=false   -V mainfont=${font} -V mainfontoptions=Path=./ --highlight-style=${highlight} -V classoption=handout -V theme:${theme} ./presentation.md -o slides_no_pause.pdf &
+
+	pandoc -t beamer --pdf-engine=xelatex -V mainfont=${font} -V mainfontoptions=Path=./ -V theme=Singapore --highlight-style=${highlight}  presentation.md -o slides.pdf &
+
+	wait
                                 '';
 
                                 installPhase = ''
