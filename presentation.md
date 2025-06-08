@@ -1,7 +1,8 @@
 ---
-title: From ‘Java Sucks’ to ‘Java…Eh, Not Bad’
+title: From ‘Java Sucks’ to ‘Java...Eh, Not Bad’
 subtitle:  How Vert.x & Java 21 Made Me Stop Complaining
 author: Thomas Gebert
+pdf-engine: xelatex
 ---
 
 # Who Am I?
@@ -71,12 +72,16 @@ author: Thomas Gebert
 
 - (Can be) fast.
 
-# Why not Kotlin? Or Clojure?
+# Why Not Kotlin? Or Clojure?
 
 . . . 
 
 - You *should* use Clojure if you can!
 
+. . . 
+
+- Java is inescapable.
+ 
 . . . 
 
 - A lot of companies still have tens of thousands of lines of Java that already exist. 
@@ -155,6 +160,28 @@ author: Thomas Gebert
 
 . . . 
 
+- TODO Example. 
+
+# Java 21 New Features*  
+
+. . . 
+
+\* (Actually a Java 15 feature that I wasn't aware of until Java 21)
+
+## ZGC
+
+. . . 
+
+- Low-latency garbage collector.
+
+. . . 
+
+- Pause times are generally sub-millisecond and almost never exceed ten milliseconds. 
+
+. . . 
+
+- Configurable, can be enabled or disabled per-project. 
+ 
 
 # Java 21 New Features.  
 
@@ -174,6 +201,32 @@ author: Thomas Gebert
 
 - Can be pattern-matched.
 
+. . .  
+
+- TODO Example. 
+ 
+# Java 21 New Features*  
+
+. . . 
+
+\* (Actually a Java 17 feature that I wasn't aware of until Java 21)
+
+# Sealed Interfaces
+
+. . . 
+
+- Basically Algebraic Data Types
+
+. . .
+
+- Can be recursive.
+
+. . . 
+
+- Can be pattern matched. 
+
+. . . 
+
 # Java 21 New Features.  
 
 . . . 
@@ -187,3 +240,113 @@ author: Thomas Gebert
 . . . 
 
 - Can be done inside `if` statements and `switch` cases. 
+
+. . .  
+
+- TODO Example. 
+
+# Java NIO
+
+. . .  
+
+- Java New IO.
+
+. . .  
+
+- Gives fine-grained control over IO, both blocking and non-blocking.  
+
+. . .  
+
+- Not new at all, but underutilized. 
+
+. . .  
+
+- TODO Basic Node.js pipes example. 
+
+# Vert.x
+
+. . .  
+
+- (In a hand-wavey way) a port of Node.js to Java. 
+
+. . . 
+
+- High performance. 
+
+. . . 
+
+- Provides constructs to handle local and distributed concurrency transparently. 
+
+# Vert.x Primitives.
+
+. . . 
+
+- TODO Placeholder
+
+. . . 
+
+# Vert.x MessageBus. 
+
+. . .  
+
+- TODO Placeholder
+
+. . .  
+
+# Vert.x Backpressure. 
+
+. . .  
+ 
+- TODO Placeholder
+
+. . .  
+
+# Vert.x basic concurrency example
+
+. . . 
+
+- TODO placeholder
+
+. . . 
+ 
+# Vert.x distributed concurrency example
+
+. . . 
+
+- TODO placeholder
+
+. . . 
+
+# Disruptor
+
+. . . 
+
+- TODO Placeholder
+
+. . . 
+ 
+# Disruptor Example
+
+# Conclusion. 
+
+. . . 
+
+- Java 21 *isn't that bad*.
+
+. . . 
+ 
+- Convince your employers to upgrade if you want to reclaim your sanity. 
+
+. . . 
+
+- Use libraries like Vert.x and Disruptor to make life simpler. 
+
+
+# Conclusion. 
+
+- thomas@gebert.app
+- blog.tombert.com
+
+![](qr_code.png){width=25%}
+
+- 

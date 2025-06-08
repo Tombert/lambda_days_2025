@@ -38,8 +38,8 @@
                                 buildPhase = ''
 
 
-					pandoc -t beamer --highlight-style=breezeDark -V classoption=handout -V theme:Warsaw ./presentation.md -o slides_no_pause.pdf
-					pandoc -t beamer --highlight-style=breezeDark -V theme:Warsaw ./presentation.md -o slides.pdf 
+					pandoc -t beamer --pdf-engine=xelatex -V mainfont=RecursiveMonoCslSt-Regular.ttf -V mainfontoptions=Path=./,UprightFont=* --highlight-style=breezeDark -V classoption=handout -V theme:Warsaw ./presentation.md -o slides_no_pause.pdf
+					pandoc -t beamer --pdf-engine=xelatex -V mainfont=RecursiveMonoCslSt-Regular.ttf -V mainfontoptions=Path=./,UprightFont=* --highlight-style=breezeDark -V theme:Warsaw ./presentation.md -o slides.pdf 
                                 '';
 
                                 installPhase = ''
