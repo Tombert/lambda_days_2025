@@ -230,19 +230,6 @@ header-includes:
 
 . . . 
 
-# Code Test
-
-```java
-class Howdy {
-    int blah; 
-    int main(String yo) {
-       System.out.println("Hey!");
-       return 0; 
-    
-    }
-
-}
-```
 
 # Java 21 New Features.  
 
@@ -343,7 +330,7 @@ class Howdy {
 
 . . . 
 
-# Disruptor
+# RxJava 
 
 . . . 
 
@@ -351,7 +338,13 @@ class Howdy {
 
 . . . 
  
-# Disruptor Example
+# RxJava Example
+
+. . . 
+ 
+- TODO Placeholder
+
+. . . 
 
 # Conclusion. 
 
