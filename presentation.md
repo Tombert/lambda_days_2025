@@ -543,6 +543,31 @@ source.pipeTo(slowSink, res -> {
 . . . 
 
 - Deployment is nearly identical across local and clustered environments
+
+ 
+. . . 
+
+# Vert.x Concurrency Example.
+
+. . . 
+
+
+```java
+public class MyVerticle extends AbstractVerticle {
+
+  @Override
+  public void start(Promise<Void> startPromise) {
+    System.out.println("Verticle started on thread: " + Thread.currentThread().getName());
+
+    vertx.setTimer(1000, id -> {
+      System.out.println("Timer fired after 1 second");
+    });
+
+    startPromise.complete();
+  }
+}
+```
+. . . 
  
 # Vert.x Concurrency Example.
 
