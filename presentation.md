@@ -234,20 +234,12 @@ BlockingQueue<String> queue = new LinkedBlockingQueue<>();
 
 // Producer
 new Thread(() -> {
-  try {
     queue.put("data");
-  } catch (InterruptedException e) {
-    Thread.currentThread().interrupt();
-  }
 }).start();
 
 // Consumer
 new Thread(() -> {
-  try {
     String item = queue.take();
-  } catch (InterruptedException e) {
-    Thread.currentThread().interrupt();
-  }
 }).start();
 
 ```
