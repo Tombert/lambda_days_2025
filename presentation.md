@@ -87,9 +87,8 @@ header-includes:
 
 . . .
 
-![CF](coldfusion.png)
+![CF](coldfusion.png){width=25%}
 ![](Coldfusion.png)
-
 . . .
 
 
@@ -650,4 +649,4 @@ Vertx.clusteredVertx(new VertxOptions(), res -> {
 
 ![](qr_code.png){width=25%}
 
-- tombert on Hacker News
+- 
