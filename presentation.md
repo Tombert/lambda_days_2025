@@ -176,6 +176,21 @@ System.out.println("Long words: " + count);
 ```
 
 
+# Java 8 and 11 New features
+
+. . . 
+
+```java
+public interface Greeter {
+  void greet(String name);
+
+  default void greetPolitely(String name) {
+    System.out.println("Hello, " + name + ". It's nice to meet you.");
+  }
+}
+```
+
+
 . . . 
 
 
