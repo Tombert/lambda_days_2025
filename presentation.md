@@ -39,11 +39,15 @@ header-includes:
   
 . . . 
 
-- Encourages bad practices.
+- Encourages bad concurrency practices.
 
 . . . 
 
-- Java progammers...
+- Java Enterprise Edition. 
+
+. . . 
+
+- Java programmers...
 
 # Examples of (Historically) Bad Things In Java. 
 
