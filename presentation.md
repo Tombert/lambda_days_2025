@@ -939,15 +939,11 @@ Disruptor<MyEvent> disruptor = new Disruptor<>(
   1024,
   Executors.defaultThreadFactory()
 );
-
 disruptor.handleEventsWith((event, seq, end) -> {
   System.out.println("Handling: " + event);
 });
-
 disruptor.start();
-
 RingBuffer<MyEvent> buffer = disruptor.getRingBuffer();
-
 long seq = buffer.next();
 try {
   MyEvent event = buffer.get(seq);
@@ -955,7 +951,6 @@ try {
 } finally {
   buffer.publish(seq);
 }
-
 ```
 
 # Conclusion. 
