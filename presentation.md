@@ -299,21 +299,164 @@ header-includes:
 
 - Provides constructs to handle local and distributed concurrency transparently. 
 
-# Vert.x Primitives.
+
+# Vert.x Core Primitives
+
 
 . . . 
 
-- TODO Placeholder
+## **Verticle**
 
 . . . 
 
-# Vert.x MessageBus. 
+  - Units of deployment and concurrency
 
-. . .  
+. . . 
 
-- TODO Placeholder
+  - Two types: StandardVerticle (blocking) and WorkerVerticle (non-blocking optional)
 
-. . .  
+. . . 
+   
+  - Deployed with `vertx.deployVerticle(...)`
+ 
+# Vert.x Core Primitives
+
+## **Event Loop**
+
+. . . 
+   
+  - Single or multi-threaded, async task execution
+
+. . . 
+   
+  - Based on Netty
+
+. . . 
+ 
+  - Designed for minimal context switching and high throughput
+
+- **Event Bus**
+
+. . . 
+ 
+  - Lightweight messaging system
+
+. . . 
+ 
+  - Supports publish/subscribe, point-to-point, and request-response
+
+. . . 
+ 
+  - Accepts JSON, POJOs (with codec), and buffers
+
+. . . 
+ 
+
+- **Future & Promise**
+
+. . . 
+ 
+  - Asynchronous result handling
+
+. . . 
+ 
+  - `Future<T>` is the result placeholder
+
+. . . 
+ 
+  - `Promise<T>` is the result provider
+
+. . . 
+ 
+  - Supports chaining with `.compose(...)` and `.map(...)`
+
+
+. . . 
+ 
+- **Context**
+
+. . . 
+ 
+  - Execution environment for a Verticle
+
+. . . 
+ 
+  - Ensures thread-affinity
+
+. . . 
+ 
+  - Helps avoid shared-state concurrency bugs
+
+
+. . . 
+ 
+- **Buffer**
+
+. . . 
+ 
+  - Efficient binary data container
+
+. . . 
+ 
+  - Higher-level alternative to Netty's ByteBuf
+
+. . . 
+ 
+  - Used in I/O and message passing
+
+
+. . . 
+ 
+- **WebClient / HttpClient**
+
+. . . 
+ 
+  - Non-blocking HTTP clients
+
+. . . 
+ 
+  - Built-in connection pooling and retry logic
+
+. . . 
+ 
+  - Supports JSON, form data, and streaming
+
+
+. . . 
+ 
+- **Timer / Periodic Tasks**
+
+. . . 
+ 
+  - Use `setTimer(...)` for delayed execution
+
+. . . 
+ 
+  - Use `setPeriodic(...)` for recurring tasks
+
+. . . 
+ 
+  - Executes on the event loop thread
+
+
+. . . 
+ 
+- **SharedData**
+
+. . . 
+ 
+  - Minimal shared-state coordination mechanism
+
+. . . 
+ 
+  - Offers maps, locks, and counters
+
+. . . 
+ 
+  - Supports clustered and local modes
+
+. . . 
+
 
 # Vert.x Backpressure. 
 
