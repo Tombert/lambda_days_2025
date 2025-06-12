@@ -823,6 +823,58 @@ Vertx.clusteredVertx(new VertxOptions(), res -> {
 
 ```
 
+# RxJava
+
+. . . 
+
+- Framework for reactive applications by Microsoft.  
+
+. . . 
+
+- Gives us functional patterns for reactive applications. 
+
+# RxJava: Basics of Reactive Programming
+
+. . . 
+ 
+- RxJava is based on the **Observer pattern** with functional style
+
+. . . 
+ 
+- Core idea: **data flows over time**, like a stream
+
+. . . 
+
+- Common building block: `Observable<T>`
+
+
+# Creating an Observable
+
+. . . 
+
+```java
+Observable<String> source = Observable.just("Alpha", "Beta", "Gamma");
+
+Observable<Integer> lengths = source
+  .map(str -> str.length())
+  .filter(len -> len >= 5);
+  
+```
+
+# Creating an Observable
+
+. . . 
+
+```java
+lengths.subscribe(
+  item -> System.out.println("Received: " + item),
+  error -> System.err.println("Error: " + error),
+  () -> System.out.println("Stream complete")
+);
+```
+. . . 
+
+
 
 # Conclusion. 
 
