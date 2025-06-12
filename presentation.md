@@ -65,6 +65,16 @@ header-includes:
 
 . . . 
  
+# Storytime. 
+
+. . .
+
+![CF](coldfusion.png){width=50%}
+
+. . .
+ 
+ 
+ 
 # Examples of (Historically) Bad Things In Java. 
 
 . . . 
@@ -91,13 +101,6 @@ header-includes:
 - (Can be) fast.
 
 
-# Storytime. 
-
-. . .
-
-![CF](coldfusion.png){width=25%}
-![](Coldfusion.png)
-. . .
 
 
 # Why Not Kotlin? Or Clojure?
