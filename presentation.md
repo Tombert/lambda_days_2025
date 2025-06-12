@@ -334,6 +334,18 @@ executor.shutdown();
 - Did not properly park IO blocking.  
 
 
+# New Executors 
+
+. . . 
+
+- Still might want to support the old pattern if you have a lot of old code. 
+  
+. . . 
+
+```java
+Executors.newVirtualThreadPerTaskExecutor()
+```
+
 # Java 21 New Features*  
 
 . . . 
@@ -902,10 +914,9 @@ lengths.subscribe(
  
 - Convince your employers to upgrade if you want to reclaim your sanity. 
 
-- Blah
 . . . 
 
-- Use libraries like Vert.x and Disruptor to make life simpler. 
+- Use libraries like Vert.x and RxJava and Disruptor to make life simpler. 
 
 
 # Conclusion. 
