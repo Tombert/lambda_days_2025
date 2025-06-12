@@ -401,6 +401,27 @@ public class Point {
 . . . 
 
 
+# Before Sealed Interfaces
+
+. . . 
+
+```java
+public interface Shape {}
+
+public class Circle implements Shape {
+  public final double radius;
+  public Circle(double radius) { this.radius = radius; }
+}
+
+public class Rectangle implements Shape {
+  public final double width, height;
+  public Rectangle(double w, double h) {
+    this.width = w;
+    this.height = h;
+  }
+}
+```
+
 # Java 21 New Features.  
 
 . . . 
