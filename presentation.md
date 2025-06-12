@@ -60,12 +60,16 @@ header-includes:
 - `synchronized` is evil. 
 
 . . . 
+
+- Core design encourages mutation. 
+
+. . . 
  
 # Examples of (Historically) Bad Things In Java. 
 
 . . . 
 
-![UML](UML.png)
+![UML](UML.png){width=50%}
 
 
 # So Why Would We Want To Even Use Java?
