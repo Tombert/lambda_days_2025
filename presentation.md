@@ -291,7 +291,6 @@ System.out.println("Long words: " + count);
 
 . . .  
 
-- TODO Example. 
 
 # Java NIO
 
@@ -309,7 +308,6 @@ System.out.println("Long words: " + count);
 
 . . .  
 
-- TODO Basic Node.js pipes example. 
 
 # Vert.x
 
@@ -627,22 +625,6 @@ Vertx.clusteredVertx(new VertxOptions(), res -> {
 
 ```
 
-
-# RxJava 
-
-. . . 
-
-- TODO Placeholder
-
-. . . 
- 
-# RxJava Example
-
-. . . 
- 
-- TODO Placeholder. 
-
-. . . 
 
 # Conclusion. 
 
