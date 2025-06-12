@@ -465,6 +465,8 @@ header-includes:
 . . . 
  
 # Vert.x Core Primitives
+
+. . . 
  
  
 ## **SharedData**
@@ -484,13 +486,37 @@ header-includes:
 . . . 
 
 
-# Vert.x Backpressure. 
+# Backpressure in Vert.x
 
-. . .  
- 
-- TODO Placeholder
+. . . 
 
-. . .  
+- Vert.x models backpressure using `ReadStream` and `WriteStream`
+
+. . . 
+
+- Data is paused/resumed automatically when the receiver can't keep up
+
+. . . 
+
+- Useful when handling large streams (e.g., file uploads, HTTP bodies)
+
+
+# Backpressure in Vert.x
+
+. . . 
+
+## Example: Handling a slow `WriteStream`
+
+```java
+source.pipeTo(slowSink, res -> {
+  if (res.succeeded()) {
+    System.out.println("All data written.");
+  } else {
+    res.cause().printStackTrace();
+  }
+});
+
+```
 
 # Vert.x basic concurrency example
 
