@@ -335,7 +335,11 @@ header-includes:
  
   - Designed for minimal context switching and high throughput
 
-- **Event Bus**
+# Vert.x Core Primitives
+
+. . . 
+
+## **Event Bus**
 
 . . . 
  
@@ -351,8 +355,11 @@ header-includes:
 
 . . . 
  
+# Vert.x Core Primitives
 
-- **Future & Promise**
+. . . 
+
+## **Future & Promise**
 
 . . . 
  
@@ -373,7 +380,11 @@ header-includes:
 
 . . . 
  
-- **Context**
+# Vert.x Core Primitives
+
+. . . 
+ 
+## **Context**
 
 . . . 
  
@@ -390,7 +401,11 @@ header-includes:
 
 . . . 
  
-- **Buffer**
+# Vert.x Core Primitives
+
+. . . 
+ 
+## **Buffer**
 
 . . . 
  
@@ -407,7 +422,11 @@ header-includes:
 
 . . . 
  
-- **WebClient / HttpClient**
+# Vert.x Core Primitives
+
+. . . 
+ 
+## **WebClient / HttpClient**
 
 . . . 
  
@@ -424,7 +443,11 @@ header-includes:
 
 . . . 
  
-- **Timer / Periodic Tasks**
+# Vert.x Core Primitives
+
+. . . 
+ 
+## **Timer / Periodic Tasks**
 
 . . . 
  
@@ -441,7 +464,10 @@ header-includes:
 
 . . . 
  
-- **SharedData**
+# Vert.x Core Primitives
+ 
+ 
+## **SharedData**
 
 . . . 
  
