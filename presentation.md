@@ -875,6 +875,22 @@ lengths.subscribe(
 . . . 
 
 
+# RxJava Niceties
+
+. . . 
+
+- Everything is async by default (with schedulers)
+
+. . . 
+
+
+- Supports composition, backpressure, error handling
+
+. . . 
+
+- Great for UI events, streams, or reactive pipelines
+
+. . . 
 
 # Conclusion. 
 
