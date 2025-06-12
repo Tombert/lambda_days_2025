@@ -532,11 +532,32 @@ source.pipeTo(slowSink, res -> {
  
 # Vert.x distributed concurrency example
 
-. . . 
+## Deploying Verticles: Local vs Clustered
 
-- TODO placeholder
+- Verticles are the basic unit of deployment and concurrency
+- Deployment is nearly identical across local and clustered environments
 
-. . . 
+### Local Deployment
+
+```java
+Vertx vertx = Vertx.vertx();
+vertx.deployVerticle(new MyVerticle());
+```
+### Distributed Deployment
+
+```java
+
+Vertx.clusteredVertx(new VertxOptions(), res -> {
+  if (res.succeeded()) {
+    Vertx vertx = res.result();
+    vertx.deployVerticle(new MyVerticle());
+  } else {
+    res.cause().printStackTrace();
+  }
+});
+
+```
+
 
 # RxJava 
 
