@@ -225,8 +225,6 @@ public interface Greeter {
 
 # Old Underutilized Java Feature
 
-## BlockingQueue (java.util.concurrent)
-
 . . . 
 
 
@@ -238,7 +236,6 @@ BlockingQueue<String> queue = new LinkedBlockingQueue<>();
 new Thread(() -> {
   try {
     queue.put("data");
-    System.out.println("Produced data");
   } catch (InterruptedException e) {
     Thread.currentThread().interrupt();
   }
@@ -248,7 +245,6 @@ new Thread(() -> {
 new Thread(() -> {
   try {
     String item = queue.take();
-    System.out.println("Consumed: " + item);
   } catch (InterruptedException e) {
     Thread.currentThread().interrupt();
   }
