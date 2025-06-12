@@ -204,6 +204,57 @@ public interface Greeter {
 
 . . . 
 
+# Old Underutilized Java Feature
+
+. . . 
+
+## BlockingQueue (java.util.concurrent)
+
+
+. . . 
+
+- A thread-safe queue that blocks on `put` and `take` operations
+
+. . . 
+
+- Useful for producer-consumer patterns
+
+. . . 
+ 
+- Comes in several flavors: `ArrayBlockingQueue`, `LinkedBlockingQueue`, `PriorityBlockingQueue`, etc.
+
+# Old Underutilized Java Feature
+
+## BlockingQueue (java.util.concurrent)
+
+. . . 
+
+
+
+```java
+BlockingQueue<String> queue = new LinkedBlockingQueue<>();
+
+// Producer
+new Thread(() -> {
+  try {
+    queue.put("data");
+    System.out.println("Produced data");
+  } catch (InterruptedException e) {
+    Thread.currentThread().interrupt();
+  }
+}).start();
+
+// Consumer
+new Thread(() -> {
+  try {
+    String item = queue.take();
+    System.out.println("Consumed: " + item);
+  } catch (InterruptedException e) {
+    Thread.currentThread().interrupt();
+  }
+}).start();
+
+```
 
 
 # Java 21 New Features.  
