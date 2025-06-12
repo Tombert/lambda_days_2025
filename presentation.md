@@ -55,7 +55,6 @@ header-includes:
 
 . . . 
 
-- Replace with concrete examples. 
 
 # So Why Would We Want To Even Use Java?
 
