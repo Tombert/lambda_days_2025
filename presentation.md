@@ -379,6 +379,25 @@ executor.shutdown();
 
 . . .  
 
+# Before pattern matching. 
+
+. . . 
+
+```java
+public void handle(Object obj) {
+  if (obj instanceof String) {
+    String s = (String) obj;
+    System.out.println("String length: " + s.length());
+  } else if (obj instanceof Integer) {
+    Integer i = (Integer) obj;
+    System.out.println("Squared: " + (i * i));
+  } else {
+    System.out.println("Unknown type");
+  }
+}
+
+```
+
 
 # Java NIO
 
