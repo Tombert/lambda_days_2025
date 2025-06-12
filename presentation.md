@@ -464,6 +464,16 @@ header-includes:
 
 . . . 
  
+```java 
+void doSomethingAsync(Promise<String> promise) {
+  vertx.setTimer(500, id -> {
+    promise.complete("Hello, future!");
+  });
+}
+
+```
+ 
+ 
 # Vert.x Core Primitives
 
 . . . 
@@ -518,21 +528,7 @@ source.pipeTo(slowSink, res -> {
 
 ```
 
-# Vert.x basic concurrency example
 
-. . . 
-
-- TODO placeholder
-
-. . . 
-
-# Vert.x more complicated concurrency example. 
-
-. . . 
-
-- TODO placeholder
-
-. . . 
  
 # Vert.x distributed concurrency example
 
