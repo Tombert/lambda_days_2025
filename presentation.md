@@ -904,6 +904,60 @@ lengths.subscribe(
 
 . . . 
 
+
+# LMAX Disruptor
+
+. . .
+
+- A **high-performance inter-thread messaging library** developed by LMAX Exchange.
+
+. . .
+
+- Designed to be **faster than queues**, especially in low-latency systems.
+
+. . .
+
+- Uses a **preallocated ring buffer** to avoid GC pressure.
+
+. . .
+
+- Eliminates locking via memory barriers and cache-friendly design.
+
+. . .
+
+- Ideal for **event-driven pipelines**, e.g. trading engines, telemetry processors.
+
+. . .
+
+- Achieved **>25M messages/sec** on commodity hardware.
+
+# LMAX Disruptor
+ 
+```java
+Disruptor<MyEvent> disruptor = new Disruptor<>(
+  MyEvent::new,
+  1024,
+  Executors.defaultThreadFactory()
+);
+
+disruptor.handleEventsWith((event, seq, end) -> {
+  System.out.println("Handling: " + event);
+});
+
+disruptor.start();
+
+RingBuffer<MyEvent> buffer = disruptor.getRingBuffer();
+
+long seq = buffer.next();
+try {
+  MyEvent event = buffer.get(seq);
+  event.setValue("Hello");
+} finally {
+  buffer.publish(seq);
+}
+
+```
+
 # Conclusion. 
 
 . . . 
