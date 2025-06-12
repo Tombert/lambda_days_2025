@@ -29,6 +29,8 @@ header-includes:
 . . . 
 
 
+
+
 # Why the Java Hate? 
 
 . . . 
@@ -37,11 +39,15 @@ header-includes:
   
 . . . 
 
-- Encourages bad practices.
+- Encourages bad concurrency practices.
 
 . . . 
 
-- Java progammers...
+- Java Enterprise Edition. 
+
+. . . 
+
+- Java programmers...
 
 # Examples of (Historically) Bad Things In Java. 
 
@@ -55,7 +61,57 @@ header-includes:
 
 . . . 
 
-- Replace with concrete examples. 
+- Core design encourages mutation. 
+
+. . . 
+
+
+# `synchronized` is Evil. 
+
+```java
+public class DeadlockExample {
+  public void thread1() {
+    synchronized (lockA) {
+      sleep(100);
+      synchronized (lockB) {
+        System.out.println("Thread 1: Holding lockB");
+      }
+    }
+  }
+
+  public void thread2() {
+    synchronized (lockB) {
+      sleep(100);
+      synchronized (lockA) {
+        System.out.println("Thread 2: Holding lockA");
+      }
+    }
+  }
+  public static void main(String[] args) {
+    DeadlockExample ex = new DeadlockExample();
+    new Thread(ex::thread1).start();
+    new Thread(ex::thread2).start();
+  }
+}
+```
+
+ 
+ 
+ 
+ 
+# Examples of (Historically) Bad Things In Java. 
+
+. . . 
+
+![](UML.png){width=50%}
+
+# Storytime. 
+
+. . .
+
+![](coldfusion.png){width=50%}
+
+. . .
 
 # So Why Would We Want To Even Use Java?
 
@@ -74,6 +130,9 @@ header-includes:
 . . . 
 
 - (Can be) fast.
+
+
+
 
 # Why Not Kotlin? Or Clojure?
 
@@ -105,7 +164,7 @@ header-includes:
 
 . . . 
 
-- They were unreceptive to my plees to use Clojure, no matter how much I complained.   
+- They were unreceptive to my pleas to use Clojure, no matter how much I complained.   
 
 . . . 
 
@@ -133,6 +192,88 @@ header-includes:
 
 . . . 
 
+# Java 8 and 11 New features
+
+. . . 
+
+```java
+int count = 0;
+for (String word : words) {
+  if (word.length() > 10) {
+    count++;
+  }
+}
+System.out.println("Long words: " + count);
+```
+
+. . . 
+
+```java
+long count = words.stream()
+                  .filter(w -> w.length() > 10)
+                  .count();
+
+System.out.println("Long words: " + count);
+
+```
+
+
+# Java 8 and 11 New features
+
+. . . 
+
+```java
+public interface Greeter {
+  void greet(String name);
+
+  default void greetPolitely(String name) {
+    System.out.println("Hello, " + name + ". It's nice to meet you.");
+  }
+}
+```
+
+
+. . . 
+
+# Old Underutilized Java Feature
+
+. . . 
+
+## BlockingQueue (java.util.concurrent)
+
+
+. . . 
+
+- A thread-safe queue that blocks on `put` and `take` operations
+
+. . . 
+
+- Useful for producer-consumer patterns
+
+. . . 
+ 
+- Comes in several flavors: `ArrayBlockingQueue`, `LinkedBlockingQueue`, `PriorityBlockingQueue`, etc.
+
+# Old Underutilized Java Feature
+
+. . . 
+
+
+
+```java
+BlockingQueue<String> queue = new LinkedBlockingQueue<>();
+
+// Producer
+new Thread(() -> {
+    queue.put("data");
+}).start();
+
+// Consumer
+new Thread(() -> {
+    String item = queue.take();
+}).start();
+
+```
 
 
 # Java 21 New Features.  
@@ -153,6 +294,7 @@ header-includes:
 
 - Allow you to have blocking code inside the thread without it breaking the pool.  
 	- The JVM will park the thread upon seeing a blocking call. 
+
 . . . 
  
 - Extremely lightweight, hundreds of thousands can easily be spun up guilt-free. 
@@ -163,7 +305,46 @@ header-includes:
 
 . . . 
 
-- TODO Example. 
+# Pre-virtual-threads
+
+. . . 
+
+```java
+ExecutorService executor = Executors.newFixedThreadPool(4);
+
+for (int i = 0; i < 10; i++) {
+  int taskId = i;
+  executor.submit(() -> {
+    System.out.println("Running task " + taskId + 
+                       " on thread " + Thread.currentThread().getName());
+  });
+}
+
+executor.shutdown();
+```
+
+# Pre-virtual-threads
+
+. . . 
+
+- Worked ok, but could break if you did any kind of blocking IO. 
+
+. . . 
+
+- Did not properly park IO blocking.  
+
+
+# New Executors 
+
+. . . 
+
+- Still might want to support the old pattern if you have a lot of old code. 
+  
+. . . 
+
+```java
+Executors.newVirtualThreadPerTaskExecutor()
+```
 
 # Java 21 New Features*  
 
@@ -206,13 +387,45 @@ header-includes:
 
 . . .  
 
-- TODO Example. 
- 
-# Java 21 New Features*  
+
+# Before Records
 
 . . . 
 
-\* (Actually a Java 17 feature that I wasn't aware of until Java 21)
+```java
+public class Point {
+  private final int x;
+  private final int y;
+
+  public Point(int x, int y) {
+    this.x = x;
+    this.y = y;
+  }
+
+  public int x() { return x; }
+  public int y() { return y; }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof Point)) return false;
+    Point p = (Point) o;
+    return x == p.x && y == p.y;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(x, y);
+  }
+
+  @Override
+  public String toString() {
+    return "Point[x=" + x + ", y=" + y + "]";
+  }
+}
+
+```
+
 
 # Sealed Interfaces
 
@@ -231,6 +444,27 @@ header-includes:
 . . . 
 
 
+# Before Sealed Interfaces
+
+. . . 
+
+```java
+public interface Shape {}
+
+public class Circle implements Shape {
+  public final double radius;
+  public Circle(double radius) { this.radius = radius; }
+}
+
+public class Rectangle implements Shape {
+  public final double width, height;
+  public Rectangle(double w, double h) {
+    this.width = w;
+    this.height = h;
+  }
+}
+```
+
 # Java 21 New Features.  
 
 . . . 
@@ -248,7 +482,25 @@ header-includes:
 
 . . .  
 
-- TODO Example. 
+# Before pattern matching. 
+
+. . . 
+
+```java
+public void handle(Object obj) {
+  if (obj instanceof String) {
+    String s = (String) obj;
+    System.out.println("String length: " + s.length());
+  } else if (obj instanceof Integer) {
+    Integer i = (Integer) obj;
+    System.out.println("Squared: " + (i * i));
+  } else {
+    System.out.println("Unknown type");
+  }
+}
+
+```
+
 
 # Java NIO
 
@@ -266,7 +518,6 @@ header-includes:
 
 . . .  
 
-- TODO Basic Node.js pipes example. 
 
 # Vert.x
 
@@ -282,69 +533,425 @@ header-includes:
 
 - Provides constructs to handle local and distributed concurrency transparently. 
 
-# Vert.x Primitives.
+
+# Vert.x Core Primitives
+
 
 . . . 
 
-- TODO Placeholder
+## **Verticle**
 
 . . . 
 
-# Vert.x MessageBus. 
+  - Units of deployment and concurrency
 
-. . .  
+. . . 
 
-- TODO Placeholder
+  - Two types: StandardVerticle (blocking) and WorkerVerticle (non-blocking optional)
 
-. . .  
-
-# Vert.x Backpressure. 
-
-. . .  
+. . . 
+   
+  - Deployed with `vertx.deployVerticle(...)`
  
-- TODO Placeholder
+# Vert.x Core Primitives
 
-. . .  
+## **Event Loop**
 
-# Vert.x basic concurrency example
+. . . 
+   
+  - Single or multi-threaded, async task execution
+
+. . . 
+   
+  - Based on Netty
+
+. . . 
+ 
+  - Designed for minimal context switching and high throughput
+
+# Vert.x Core Primitives
 
 . . . 
 
-- TODO placeholder
+## **Event Bus**
+
+. . . 
+ 
+  - Lightweight messaging system
+
+. . . 
+ 
+  - Supports publish/subscribe, point-to-point, and request-response
+
+. . . 
+ 
+  - Accepts JSON, POJOs (with codec), and buffers
+
+. . . 
+ 
+# Vert.x Core Primitives
 
 . . . 
 
-# Vert.x more complicated concurrency example. 
+## **Future & Promise**
+
+. . . 
+ 
+  - Asynchronous result handling
+
+. . . 
+ 
+  - `Future<T>` is the result placeholder
+
+. . . 
+ 
+  - `Promise<T>` is the result provider
+
+. . . 
+ 
+  - Supports chaining with `.compose(...)` and `.map(...)`
+
+
+. . . 
+ 
+# Vert.x Core Primitives
+
+. . . 
+ 
+## **Context**
+
+. . . 
+ 
+  - Execution environment for a Verticle
+
+. . . 
+ 
+  - Ensures thread-affinity
+
+. . . 
+ 
+  - Helps avoid shared-state concurrency bugs
+
+
+. . . 
+ 
+# Vert.x Core Primitives
+
+. . . 
+ 
+## **Buffer**
+
+. . . 
+ 
+  - Efficient binary data container
+
+. . . 
+ 
+  - Higher-level alternative to Netty's ByteBuf
+
+. . . 
+ 
+  - Used in I/O and message passing
+
+
+. . . 
+ 
+# Vert.x Core Primitives
+
+. . . 
+ 
+## **WebClient / HttpClient**
+
+. . . 
+ 
+  - Non-blocking HTTP clients
+
+. . . 
+ 
+  - Built-in connection pooling and retry logic
+
+. . . 
+ 
+  - Supports JSON, form data, and streaming
+
+
+. . . 
+ 
+# Vert.x Core Primitives
+
+. . . 
+ 
+## **Timer / Periodic Tasks**
+
+. . . 
+ 
+  - Use `setTimer(...)` for delayed execution
+
+. . . 
+ 
+  - Use `setPeriodic(...)` for recurring tasks
+
+. . . 
+ 
+  - Executes on the event loop thread
+
+
+. . . 
+ 
+```java 
+void doSomethingAsync(Promise<String> promise) {
+  vertx.setTimer(500, id -> {
+    promise.complete("Hello, future!");
+  });
+}
+
+```
+ 
+ 
+# Vert.x Core Primitives
+
+. . . 
+ 
+ 
+## **SharedData**
+
+. . . 
+ 
+  - Minimal shared-state coordination mechanism
+
+. . . 
+ 
+  - Offers maps, locks, and counters
+
+. . . 
+ 
+  - Supports clustered and local modes
 
 . . . 
 
-- TODO placeholder
+
+# Backpressure in Vert.x
 
 . . . 
+
+- Vert.x models backpressure using `ReadStream` and `WriteStream`
+
+. . . 
+
+- Data is paused/resumed automatically when the receiver can't keep up
+
+. . . 
+
+- Useful when handling large streams (e.g., file uploads, HTTP bodies)
+
+
+# Backpressure in Vert.x
+
+. . . 
+
+## Example: Handling a slow `WriteStream`
+
+```java
+source.pipeTo(slowSink, res -> {
+  if (res.succeeded()) {
+    System.out.println("All data written.");
+  } else {
+    res.cause().printStackTrace();
+  }
+});
+
+```
+
+
  
 # Vert.x distributed concurrency example
 
 . . . 
 
-- TODO placeholder
-
-. . . 
-
-# RxJava 
-
-. . . 
-
-- TODO Placeholder
+## Deploying Verticles: Local vs Clustered
 
 . . . 
  
-# RxJava Example
+- Verticles are the basic unit of deployment and concurrency
+
+. . . 
+
+- Deployment is nearly identical across local and clustered environments
+
+ 
+. . . 
+
+# Vert.x Concurrency Example.
+
+. . . 
+
+
+```java
+public class MyVerticle extends AbstractVerticle {
+
+  @Override
+  public void start(Promise<Void> startPromise) {
+    System.out.println("Verticle started on thread: " + Thread.currentThread().getName());
+
+    vertx.setTimer(1000, id -> {
+      System.out.println("Timer fired after 1 second");
+    });
+
+    startPromise.complete();
+  }
+}
+```
+. . . 
+ 
+# Vert.x Concurrency Example.
+
+. . . 
+
+## Local Deployment
+
+```java
+Vertx vertx = Vertx.vertx();
+vertx.deployVerticle(new MyVerticle());
+```
+
+# Vert.x Concurrency Example.
+
+. . .
+
+## Distributed Deployment
+
+. . .
+
+```java
+
+Vertx.clusteredVertx(new VertxOptions(), res -> {
+  if (res.succeeded()) {
+    Vertx vertx = res.result();
+    vertx.deployVerticle(new MyVerticle());
+  } else {
+    res.cause().printStackTrace();
+  }
+});
+
+```
+
+# RxJava
+
+. . . 
+
+- Framework for reactive applications by Microsoft.  
+
+. . . 
+
+- Gives us functional patterns for reactive applications. 
+
+# RxJava: Basics of Reactive Programming
 
 . . . 
  
-- TODO Placeholder
+- RxJava is based on the **Observer pattern** with functional style
 
 . . . 
+ 
+- Core idea: **data flows over time**, like a stream
+
+. . . 
+
+- Common building block: `Observable<T>`
+
+
+# Creating an Observable
+
+. . . 
+
+```java
+Observable<String> source = Observable.just("Alpha", "Beta", "Gamma");
+
+Observable<Integer> lengths = source
+  .map(str -> str.length())
+  .filter(len -> len >= 5);
+  
+```
+
+# Creating an Observable
+
+. . . 
+
+```java
+lengths.subscribe(
+  item -> System.out.println("Received: " + item),
+  error -> System.err.println("Error: " + error),
+  () -> System.out.println("Stream complete")
+);
+```
+. . . 
+
+
+# RxJava Niceties
+
+. . . 
+
+- Everything is async by default (with schedulers)
+
+. . . 
+
+
+- Supports composition, backpressure, error handling
+
+. . . 
+
+- Great for UI events, streams, or reactive pipelines
+
+. . . 
+
+
+# LMAX Disruptor
+
+. . .
+
+- A **high-performance inter-thread messaging library** developed by LMAX Exchange.
+
+. . .
+
+- Designed to be **faster than queues**, especially in low-latency systems.
+
+. . .
+
+- Uses a **preallocated ring buffer** to avoid GC pressure.
+
+. . .
+
+- Eliminates locking via memory barriers and cache-friendly design.
+
+. . .
+
+- Ideal for **event-driven pipelines**, e.g. trading engines, telemetry processors.
+
+. . .
+
+- Achieved **>25M messages/sec** on commodity hardware.
+
+# LMAX Disruptor
+ 
+```java
+Disruptor<MyEvent> disruptor = new Disruptor<>(
+  MyEvent::new,
+  1024,
+  Executors.defaultThreadFactory()
+);
+disruptor.handleEventsWith((event, seq, end) -> {
+  System.out.println("Handling: " + event);
+});
+disruptor.start();
+RingBuffer<MyEvent> buffer = disruptor.getRingBuffer();
+long seq = buffer.next();
+try {
+  MyEvent event = buffer.get(seq);
+  event.setValue("Hello");
+} finally {
+  buffer.publish(seq);
+}
+```
 
 # Conclusion. 
 
@@ -358,7 +965,7 @@ header-includes:
 
 . . . 
 
-- Use libraries like Vert.x and Disruptor to make life simpler. 
+- Use libraries like Vert.x and RxJava and Disruptor to make life simpler. 
 
 
 # Conclusion. 
@@ -368,4 +975,3 @@ header-includes:
 
 ![](qr_code.png){width=25%}
 
-- 
