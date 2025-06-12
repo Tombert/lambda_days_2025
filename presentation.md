@@ -64,14 +64,38 @@ header-includes:
 - Core design encourages mutation. 
 
 . . . 
+
+
+# `synchronized` is Evil. 
+
+```java
+public class DeadlockExample {
+  public void thread1() {
+    synchronized (lockA) {
+      sleep(100);
+      synchronized (lockB) {
+        System.out.println("Thread 1: Holding lockB");
+      }
+    }
+  }
+
+  public void thread2() {
+    synchronized (lockB) {
+      sleep(100);
+      synchronized (lockA) {
+        System.out.println("Thread 2: Holding lockA");
+      }
+    }
+  }
+  public static void main(String[] args) {
+    DeadlockExample ex = new DeadlockExample();
+    new Thread(ex::thread1).start();
+    new Thread(ex::thread2).start();
+  }
+}
+```
+
  
-# Storytime. 
-
-. . .
-
-![CF](coldfusion.png){width=50%}
-
-. . .
  
  
  
@@ -79,8 +103,15 @@ header-includes:
 
 . . . 
 
-![UML](UML.png){width=50%}
+![](UML.png){width=50%}
 
+# Storytime. 
+
+. . .
+
+![](coldfusion.png){width=50%}
+
+. . .
 
 # So Why Would We Want To Even Use Java?
 
@@ -816,4 +847,3 @@ Vertx.clusteredVertx(new VertxOptions(), res -> {
 
 ![](qr_code.png){width=25%}
 
-- 
