@@ -122,7 +122,7 @@ header-includes:
 
 . . . 
 
-- They were unreceptive to my plees to use Clojure, no matter how much I complained.   
+- They were unreceptive to my pleas to use Clojure, no matter how much I complained.   
 
 . . . 
 
@@ -147,6 +147,34 @@ header-includes:
 . . . 
 
 - Concurrency is an even bigger part of the language, and a lot of the features from concurrent-first languages have been brought over. 
+
+. . . 
+
+# Java 8 and 11 New features
+
+. . . 
+
+```java
+int count = 0;
+for (String word : words) {
+  if (word.length() > 10) {
+    count++;
+  }
+}
+System.out.println("Long words: " + count);
+```
+
+. . . 
+
+```java
+long count = words.stream()
+                  .filter(w -> w.length() > 10)
+                  .count();
+
+System.out.println("Long words: " + count);
+
+```
+
 
 . . . 
 
@@ -180,7 +208,6 @@ header-includes:
 
 . . . 
 
-- TODO Example. 
 
 # Java 21 New Features*  
 
@@ -223,7 +250,6 @@ header-includes:
 
 . . .  
 
-- TODO Example. 
  
 # Java 21 New Features*  
 
