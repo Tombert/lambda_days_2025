@@ -316,12 +316,6 @@ new Thread(() -> {
 
 . . .  
 
- 
-# Java 21 New Features*  
-
-. . . 
-
-\* (Actually a Java 17 feature that I wasn't aware of until Java 21)
 
 # Sealed Interfaces
 
