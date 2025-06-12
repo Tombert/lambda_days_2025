@@ -29,6 +29,8 @@ header-includes:
 . . . 
 
 
+
+
 # Why the Java Hate? 
 
 . . . 
@@ -54,6 +56,12 @@ header-includes:
 - `synchronized` is evil. 
 
 . . . 
+ 
+# Examples of (Historically) Bad Things In Java. 
+
+. . . 
+
+![UML](UML.png)
 
 
 # So Why Would We Want To Even Use Java?
@@ -73,6 +81,16 @@ header-includes:
 . . . 
 
 - (Can be) fast.
+
+
+# Storytime. 
+
+. . .
+
+![CF](coldfusion.png)
+![](Coldfusion.png)
+. . .
+
 
 # Why Not Kotlin? Or Clojure?
 
