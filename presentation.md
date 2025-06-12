@@ -263,6 +263,7 @@ new Thread(() -> {
 
 - Allow you to have blocking code inside the thread without it breaking the pool.  
 	- The JVM will park the thread upon seeing a blocking call. 
+
 . . . 
  
 - Extremely lightweight, hundreds of thousands can easily be spun up guilt-free. 
