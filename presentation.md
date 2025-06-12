@@ -274,6 +274,34 @@ new Thread(() -> {
 
 . . . 
 
+# Pre-virtual-threads
+
+. . . 
+
+```java
+ExecutorService executor = Executors.newFixedThreadPool(4);
+
+for (int i = 0; i < 10; i++) {
+  int taskId = i;
+  executor.submit(() -> {
+    System.out.println("Running task " + taskId + 
+                       " on thread " + Thread.currentThread().getName());
+  });
+}
+
+executor.shutdown();
+```
+
+# Pre-virtual-threads
+
+. . . 
+
+- Worked ok, but could break if you did any kind of blocking IO. 
+
+. . . 
+
+- Did not properly park IO blocking.  
+
 
 # Java 21 New Features*  
 
